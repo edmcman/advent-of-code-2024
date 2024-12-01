@@ -1023,3 +1023,28 @@ Partone ← (
 ⍤. =11 Partone Ponesample
 
 Partone Ponein
+
+# Stolen from https://www.reddit.com/r/adventofcode/comments/1h3vp6n/comment/lzvk2zk/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+Input ← ⍉⊜(⊜⋕≠@ .)≠@\n.&fras"input"
+
+(
+ Input
+ ⊃
+ # Part 2
+ (/+×⟜(/+⍉⊞=)°⊟)
+ # Part 1
+ (/+⌵/-≡⍆)
+)
+
+Parttwo ←
+(Input
+ °⊟  # Change the two rows into two inputs 
+ (⊞= # cartesian product equality
+  ⍉
+  /+ # add them up
+  )
+ ⟜    # Take the first row of the input (list 1)
+ /+ × # Multiply the two arrays column wise and sum
+)
+
+Parttwo Input

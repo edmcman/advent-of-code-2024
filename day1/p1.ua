@@ -1020,8 +1020,6 @@ Partone ← (
   /+ # sum
 )
 
-Partone Ponesample
-
-# Ponein
+⍤. =11 Partone Ponesample
 
 Partone Ponein

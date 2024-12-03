@@ -58,15 +58,11 @@ Remove₁ ← (
   ≡▽(⊙¤)
 )
 
-# Remove₁ "hello"
-
 CheckReport₂ ← (
   Remove₁      # Remove 1, producing rows of possible reports
   ≡CheckReport # check each report
   /↥           # are any true?
 )
-
-# Remove₁ [1 3 2 4 5]
 
 CheckReport₃ ← /↥[⊃(CheckReport)(CheckReport₂)]
 

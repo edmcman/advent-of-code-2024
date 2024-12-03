@@ -6,41 +6,72 @@ Input  ← Parse "day2/input.txt"
 # The levels are either all increasing or all decreasing.
 # Any two adjacent levels differ by at least one and at most three.
 
-Getpairs ← (
-  .
-  ≡⍚↘ 1
-  :
-  ≡⍚(⇌ ↘ 1 ⇌)
+GetPairs ← (
+  ◫ 2
 )
 
-# Getpairs Sample
+GetDerivative ← ≡/- GetPairs
 
-Diffs ← - Getpairs Input
-
-Absdiffs ← ⌵ Diffs
-
-Between ← (
-  > 3 Absdiffs
-  < 1 Absdiffs
+# Is array between [1,3]?
+DerivativesAllBetween ← (
+  .
+  >3
+  :
+  <1
   +
-  ⍚/+
+  /+
   = 0
 )
 
-# Between
+GetDerivative °□ ⊢ Sample
 
-Increasing ← =0 ⍚/+ ≤ 0 Diffs
-Decreasing ← =0 ⍚/+ ≥ 0 Diffs
+DerivativesIncreasing ← /↧ >0
+DerivativesDecreasing ← DerivativesIncreasing ¯
 
-# Increasing
-# Decreasing
+⍤. = 1 DerivativesDecreasing [¯1 ¯2 ¯3]
+⍤. = 0 DerivativesIncreasing [¯1 ¯2 ¯3]
+⍤. = 1 DerivativesIncreasing [1]
 
-Either ← + Increasing Decreasing
-# Either
+⍤. = 1 DerivativesAllBetween [1 2 3]
+⍤. = 0 DerivativesAllBetween [4 5 6]
 
-All ← = 2 + Either Between
+AllBetween ← ⍚DerivativesAllBetween
+⍤. = 1 ≍ {1 0} AllBetween {[1 2 3] [4 5 6]}
 
-# All
+SteadyDerivative ← ↥ ⊃DerivativesIncreasing DerivativesDecreasing
 
-# part 1
-°□/+ All
+CheckReport ← (
+  GetDerivative
+  /↧ [⊃(DerivativesAllBetween ⌵) SteadyDerivative]
+)
+
+Part₁ ← /+ ⍚CheckReport
+
+Part₁ Sample
+Part₁ Input
+
+# Part 2
+
+Remove₁ ← (
+  .
+  ⊞≠.⇡⧻ # Mask matrix
+  ≡▽(⊙¤)
+)
+
+# Remove₁ "hello"
+
+CheckReport₂ ← (
+  Remove₁      # Remove 1, producing rows of possible reports
+  ≡CheckReport # check each report
+  /↥           # are any true?
+)
+
+# Remove₁ [1 3 2 4 5]
+
+CheckReport₃ ← /↥[⊃(CheckReport)(CheckReport₂)]
+
+CheckReport₃ [1 2 3 4 5]
+
+Part₂ ← /+ ⍚CheckReport₃
+Part₂ Sample
+Part₂ Input

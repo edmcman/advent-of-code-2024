@@ -18,8 +18,8 @@ Part₁ Input
 
 Sample₂ ← $ xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))
 
-DontMask ← (⦷ "don't()")
-DoMask   ← (⦷ "do()")
+DontMask ← (⌕ "don't()")
+DoMask   ← (⌕ "do()")
 
 # Pick a mask based on state. 1=Do 0=Dont
 # PickAMask ← ⊡:[⊃DontMask DoMask] :
@@ -75,12 +75,6 @@ FoldFun ← (
 
 MkMask ← ⇌ ∧FoldFun : [1] BuildMatrix
 MkMask Sample₂
-# TheMask
-
-# ⧻ TheMask Sample
-⧻ Sample
-
-# ▽ TheMask Sample
 
 GetMaskedText ← ▽ MkMask .
 GetMaskedText Sample₂

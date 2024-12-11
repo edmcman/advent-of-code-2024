@@ -1,4 +1,4 @@
-in←•file.Lines "sample.txt"
+in←•file.Lines "input.txt"
 
 #•Show (2/≍≠⊑in) ⥊ in
 
@@ -6,7 +6,7 @@ in←•file.Lines "sample.txt"
 matrix ← (∘‿(≠⊑in)) ⥊ ∾in
 
 #•Show matrix2
-•Show ≢ matrix
+#•Show ≢ matrix
 
 Count←{+´+˝ "XMAS" ⍷ 𝕩}
 #Diag←>≠↑¨(+⌜´↕¨∘≢)⊸⊔
@@ -15,13 +15,17 @@ Count←{+´+˝ "XMAS" ⍷ 𝕩}
 DiagIndices ← (+⌜´↕¨∘≢)⊸⊔
 Diag ← >≠↑¨ DiagIndices
 
-transforms ← ⟨⊣,⌽˘,⍉,⌽⍉,Diag,⌽˘Diag,⍉Diag,⌽∘⍉Diag⟩
+# Diag = top right to bottom left
+# ⌽˘Diag = bottom left to top right
+
+transforms ← ⟨⊣,⌽˘,⍉,⌽˘⍉,Diag,⌽˘∘Diag,Diag⌽˘,⌽˘∘Diag⌽˘⟩
+#transforms ← ⟨Diag⌽˘⟩
 
 # show the transforms
 #•Show transforms {𝕎𝕩}¨ <matrix
 
-Test ← {+´ Count¨ 𝕨 {𝕎𝕩}¨<𝕩}
-•Show transforms Test matrix
+Part1 ← { +´ Count¨ 𝕨 {𝕎𝕩}¨<𝕩}
+•Show transforms Part1 matrix
 
 #•Show Count matrix
 #•Show matrix

@@ -24,8 +24,21 @@ transforms ← ⟨⊣,⌽˘,⍉,⌽˘⍉,Diag,⌽˘∘Diag,Diag⌽˘,⌽˘∘Dia
 # show the transforms
 #•Show transforms {𝕎𝕩}¨ <matrix
 
-Part1 ← { +´ Count¨ 𝕨 {𝕎𝕩}¨<𝕩}
-•Show transforms Part1 matrix
+xmas ← ["M.S", ".A.", "M.S"]
+
+#IsXmas ← {𝕩 = xmas}
+IsXmas ← {5= +˝ +˘˝ 𝕩 = xmas}
+Window ← {3‿3 ↕ 𝕩} 
+
+
+Part1 ← {+´ Count¨ 𝕨 {𝕎𝕩}¨<𝕩}
+Part2 ← {⊑ +˝+˝+˝ IsXmas⎉2 Window˘ ∘ >𝕨 {𝕎𝕩}¨<𝕩}
+#Part2 ← {IsXmas⎉2 3‿3↕ 𝕨 {𝕎𝕩}¨<𝕩}
+#Part2 ← {IsXmas⎉2 (3‿3 ↕𝕩)}
+#•Show transforms Part1 matrix
+#huh ← 3‿3 ↕matrix
+#•Show (= xmas)⎉2 (3‿3 ↕matrix)
+•Show ((↕4)⊏transforms) Part2 matrix
 
 #•Show Count matrix
 #•Show matrix

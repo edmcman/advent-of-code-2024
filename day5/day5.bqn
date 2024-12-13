@@ -21,15 +21,16 @@ CanComeBefore ← IsPairOK
 ListThing ← >⌜˜ ∘ ↕≠
 IsUpdateOK ← {∧´⥊(ListThing 𝕩) ∨ (>IsPairOK⌜˜ 𝕩)}
 
-#•Show > ListThing 53‿13
-
-#•Show IsUpdateOK 75‿47‿61‿53‿29
-#•Show IsUpdateOK 61‿13‿29
-#•Show >IsPairOK⌜˜ 61‿13‿29
-#•Show ListThing 61‿13‿29
-
 Middle ← {(⌊2 ÷˜ ≠𝕩) ⊑ 𝕩}
-#Middle ← (+1)∘(÷2)≠
 
 part1 ← +´ Middle¨ (IsUpdateOK¨ parsed.updates) / parsed.updates
 •Show part1
+
+SortOneUpdate ← { (⍒ >(∾⌜˜ 𝕩) ∊¨ <parsed.orderings) ⊏ 𝕩}
+
+#•Show 53‿13 ∊ parsed.orderings
+
+#part2 ← SortOneUpdate¨ parsed.updates
+part2 ← +´ Middle¨ SortOneUpdate¨ (¬ IsUpdateOK¨ parsed.updates) / parsed.updates
+•Show part2
+#•Show SortOneUpdate ↑ parsed.updates

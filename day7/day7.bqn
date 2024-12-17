@@ -5,7 +5,7 @@ ParseInt ← (10⊸×⊸+˜´∘⌽-⟜'0')
 
 Parse ← >{a‿b ← ':'⊸Split 𝕩⋄⟨ParseInt a, ParseInt¨ 1↓(' 'Split b)⟩}¨
 
-•Show Parse in
+#•Show Parse in
 
 
 # 𝕨 is a list of left operands
@@ -17,7 +17,7 @@ Part1 ← +´ { a‿bs ← 𝕩 ⋄ a×∨´ a=SpecialFold´ ⌽bs }˘
 
 •Show Part1 Parse in
 
-Concat ← ⊢+⊣×(10⊸⋆{⌊1+10⋆⁼𝕩})
+Concat ← ⊢+⊣×(10⊸⋆(⌊1+10⋆⁼⊢))
 #Concat ← ⊢+⊣×(10⊸⋆(⌊1⊸+10⊸⋆⁼))
 
 SpecialFold2 ← Concat˜∾+∾×

@@ -16,3 +16,12 @@ SpecialFold ← +∾×
 Part1 ← +´ { a‿bs ← 𝕩 ⋄ a×∨´ a=SpecialFold´ ⌽bs }˘
 
 •Show Part1 Parse in
+
+Concat ← ⊢+⊣×(10⊸⋆{⌊1+10⋆⁼𝕩})
+#Concat ← ⊢+⊣×(10⊸⋆(⌊1⊸+10⊸⋆⁼))
+
+SpecialFold2 ← Concat˜∾+∾×
+
+Part2 ← +´ { a‿bs ← 𝕩 ⋄ a×∨´ a=SpecialFold2´ ⌽bs }˘
+
+•Show Part2 Parse in

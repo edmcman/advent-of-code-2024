@@ -18,9 +18,9 @@ GetNonDiag ← ≠⌜˜∘↕∘≠/○⥊⊢
 
 #FreqHelperOrig ← {(OnGrid⟜in)¨⊸/ GetNonDiag Extend⌜˜ GetIndices (in=𝕩)}
 # todo take in as left argument
-FreqHelperTest ← (OnGrid⟜in)¨⊸/∘GetNonDiag∘(Extend⌜˜)∘GetIndices∘=
+FreqHelper ← {grid S 𝕩: (OnGrid⟜grid)¨⊸/∘GetNonDiag(Extend⌜˜)GetIndices(grid⊸=) 𝕩}
 
-part1 ← ≠ ⍷∾´ FreqHelper¨ Freqs in
+part1 ← ≠ ⍷∾´ (in⊸FreqHelper)¨ Freqs in
 •Show part1
 
 # ok take the difference from 𝕩. as we go in that (forward) direction, which

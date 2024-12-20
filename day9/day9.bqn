@@ -19,24 +19,18 @@ matplusplus ← ⍉(1‿(≠mat)⥊(↕≠mat))∾⍉mat
 
 Repeat ← {𝕨/[𝕩]}
 
-FoldCell ← {<((1⊑𝕩) Repeat ⊑𝕩) ∾ ((2⊑𝕩) Repeat '.')}
-
 #•Show matplusplus
-string ← ∾´ FoldCell˘ matplusplus
+string ← ∾´ {<((1⊑𝕩) Repeat ⊑𝕩) ∾ ((2⊑𝕩) Repeat '.')}˘ matplusplus
 
-•Show string
+#•Show string
 
 # 3 GetLastData string
 GetLastData ← ⌽-⊸↑⟜('.'⊸≠⊸/)
 
 part1 ← {
     numfree ← +´ string = '.'
-    numblock ← +´ string ≠ '.'
-    compressed ← numblock ↑ (numfree GetLastData string)⌾((string='.')⊸/) string
-    # compute checksum
-    #compressed ≍ compressed
-    [a,b] ← (⊣≍(↕≠)) compressed
-    +´ a×b
+    compressed ← (-numfree) ↓ (numfree GetLastData string)⌾((string='.')⊸/) string
+    +´ (⊣×(↕≠)) compressed
 }
 
 •Show part1

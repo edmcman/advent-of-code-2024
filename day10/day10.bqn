@@ -26,3 +26,18 @@ S ← {grid‿visited S coord:
 # Need to find trailheads
 trailheads ← GetIndices in=0
 part1 ← +´ {{+´ 9=𝕩 ⊑ in} in‿⟨⟩⊸S 𝕩}¨ trailheads
+
+SP2 ← {grid‿visited‿path S coord:
+    //•Show "coord" ⋈ coord
+    path ↩ path∾(⋈coord)
+    goals ← ⟨coord Goal grid⟩ / ⟨⋈path⟩
+    //•Show "goals" ⋈ goals
+    {⊑(<coord) ∊ visited ?
+     goals;
+     visited ↩ (⍷visited∾(⋈coord))
+
+     goals ∾´ grid‿visited‿path⊸S¨ (grid Succ coord)
+    }
+}
+
+part2 ← +´ {≠ in‿⟨⟩‿⟨⟩⊸SP2 𝕩}¨ trailheads

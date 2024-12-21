@@ -18,15 +18,7 @@ S ← {grid‿visited S coord:
     #•Show "coord" ⋈ coord
     {⊑(<coord) ∊ visited ?
      visited ;
-     #•Show visited
-     #•Show "visited" ⋈ visited
-     #•Show visited
      visited ↩ (⍷visited∾(⋈coord))
-     #•Show visited
-     #•Show "visited" ⋈ visited
-     #visited
-     #•Show "succs" ⋈ grid Succ coord
-     # merge them together!
      ⍷ visited ∾´ grid‿visited⊸S¨ (grid Succ coord)
     }
 }

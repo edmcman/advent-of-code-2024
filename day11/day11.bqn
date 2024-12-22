@@ -16,16 +16,15 @@ F ← {𝕊𝕩:
 
 _memo ← {F _𝕣: (•HashMap˜⟨⟩)⊸{𝕨.Has 𝕩 ? 𝕨.Get 𝕩; (⊢⊣𝕩⊸𝕨.Set) F 𝕩 }}
 
-F3 ← {𝕊 i‿n: {
-    #•Show n ≡ 0
-    (n≡1) ? F i;
-    l ← F3 i‿(1)
-    ∾´ {F3 𝕩‿(n-1)}¨ l
+Fcount ← {𝕊 i‿n: {
+    (n≡0) ? 1;
+    l ← F i
+    +´ {Fcount 𝕩‿(n-1)}¨ l
 }}
-F3 ↩ F3 _memo
+Fcount ↩ Fcount _memo
 
 •Show "part1"
-part1 ← ≠ ∾´ {F3 𝕩‿25}¨ in
+part1 ← +´ {Fcount 𝕩‿25}¨ in
 •Show part1
-part2 ← ≠ ∾´ {F3 𝕩‿45}¨ in
+part2 ← +´ {Fcount 𝕩‿75}¨ in
 •Show part2

@@ -8,10 +8,9 @@ ToBin ← 2{𝕩=0?↕0;(𝕊⌊𝕩÷𝕗)∾𝕗|𝕩}
 FromBin ← 2⊸×⊸+˜´⌽
 
 MkState ← {𝕊⟨a,b,c⟩‿prog:
-    a‿b‿c‿prog ⇐ #a‿b‿c‿prog
+    a‿b‿c‿prog ⇐
     pc ⇐ 0
     output ⇐ ⟨⟩
-    4
     IncPC ← {𝕊: pc ↩ pc+1 }
     GetCombo ← {
         ⊑𝕩∊[0,1,2,3] ? 𝕩 ;
@@ -20,8 +19,12 @@ MkState ← {𝕊⟨a,b,c⟩‿prog:
         𝕩≡6 ? c ;
         !0
     }
+    Print ← {𝕊:
+        •Show "a" ⋈ a
+        •Show "b" ⋈ b
+        •Show "c" ⋈ c
+    }
     Step ⇐ {𝕊:
-        ! ¬ Done@
         opcode‿op ← pc ⊏ prog
         {
             # adv
@@ -32,8 +35,7 @@ MkState ← {𝕊⟨a,b,c⟩‿prog:
             } ;
             # bxl
             opcode=1 ? {
-                b ↩ ⊑ [b] 8•bit._xor op
-                #FromBin (ToBin b)≠(ToBin op)
+                b ↩ ⊑ [8 | b] 8•bit._xor (8 | op)
             } ;
             # bst
             opcode=2 ? {
@@ -45,7 +47,7 @@ MkState ← {𝕊⟨a,b,c⟩‿prog:
             } ;
             # bxc
             opcode=4 ? {
-                b ↩ ⊑ [b] 32•bit._xor c
+                b ↩ ⊑ [8 | b] 8•bit._xor (8 | c)
             } ;
             # out
             opcode=5 ? {
@@ -76,3 +78,26 @@ MkState ← {𝕊⟨a,b,c⟩‿prog:
 Join ← {1↓⥊𝕨≍˘𝕩}
 
 part1 ←  ',' Join '0' + (MkState ⟨a,b,c⟩‿prog).Run @
+
+# Start with last byte and work forward
+
+Part2 ← {prog 𝕊 in‿n:
+
+    goal ← ⌽ (n+1)↑ ⌽⥊prog
+    solns ← / (<goal) ≡¨ {𝕊: (MkState ⟨in+𝕩,0,0⟩‿prog).Run @}¨ (↕8)
+
+    {goal≡⥊prog ? •Show "GOAL!" ⋄ in + solns ;
+
+    # shift left by 3 bits
+    ⟨⟩ ∾´ {prog Part2 𝕩‿(n+1)}¨ (8 × (in + solns))
+}}
+
+p2s ← prog Part2 0‿0
+p2 ← ⌊´ p2s
+
+st ← MkState ⟨p2,0,0⟩‿prog
+st.Run @
+#•Show st.output
+#•Show prog
+!st.output ≡ ⥊prog
+

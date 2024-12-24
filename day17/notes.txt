@@ -1,0 +1,9 @@
+2 4  # B = A mod 8 | B = next
+1 3  # B = B xor 3 | B = next xor 3
+7 5  # C = A div 2^B | C = A >> (next xor 3)
+0 3  # A = A div 8 | _A = A >> 8
+1 5  # B = B xor 5 | B = next xor 3 xor 5
+4 4  # B = B xor C | B = next xor 3 xor 5 xor (A >> (next xor 3))
+5 5  # out B mod 8 | output B
+3 0  # jnz 0
+
